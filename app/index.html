@@ -3,20 +3,80 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Nights — Cover Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Cover controls">
+    <h1>VICE NIGHTS</h1>
+    <p class="sub">Turn your photo into a sunset poster cover. Pick a photo for each panel, write the caption, export a PNG.</p>
+
+    <fieldset class="panel-slot">
+      <legend>Hero panel</legend>
+      <label>Photo <input type="file" accept="image/*" data-photo="0"></label>
+      <button type="button" data-sample="0">Use a sample photo</button>
+      <label>Zoom <input type="range" min="1" max="2.5" step="0.05" value="1" data-zoom="0"></label>
+      <label>Move left / right <input type="range" min="-1" max="1" step="0.05" value="0" data-ox="0"></label>
+      <label>Move up / down <input type="range" min="-1" max="1" step="0.05" value="0" data-oy="0"></label>
+    </fieldset>
+
+    <fieldset class="panel-slot">
+      <legend>Second panel</legend>
+      <label>Photo <input type="file" accept="image/*" data-photo="1"></label>
+      <button type="button" data-sample="1">Use a sample photo</button>
+      <label>Zoom <input type="range" min="1" max="2.5" step="0.05" value="1" data-zoom="1"></label>
+      <label>Move left / right <input type="range" min="-1" max="1" step="0.05" value="0" data-ox="1"></label>
+      <label>Move up / down <input type="range" min="-1" max="1" step="0.05" value="0" data-oy="1"></label>
+    </fieldset>
+
+    <fieldset class="panel-slot">
+      <legend>Third panel</legend>
+      <label>Photo <input type="file" accept="image/*" data-photo="2"></label>
+      <button type="button" data-sample="2">Use a sample photo</button>
+      <label>Zoom <input type="range" min="1" max="2.5" step="0.05" value="1" data-zoom="2"></label>
+      <label>Move left / right <input type="range" min="-1" max="1" step="0.05" value="0" data-ox="2"></label>
+      <label>Move up / down <input type="range" min="-1" max="1" step="0.05" value="0" data-oy="2"></label>
+    </fieldset>
+
+    <button id="fill-all" type="button">One photo for all panels</button>
+
+    <label>Caption <input id="caption" type="text" maxlength="32" value="SUNSET HEIST"></label>
+    <label>Tagline <input id="tagline" type="text" maxlength="40" value="VICE NIGHTS"></label>
+
+    <fieldset class="swatches">
+      <legend>Title colour</legend>
+      <button type="button" data-color="#ffffff" class="sw white picked" aria-label="White title"></button>
+      <button type="button" data-color="#ffd319" class="sw yellow" aria-label="Yellow title"></button>
+      <button type="button" data-color="#ff71ce" class="sw pink" aria-label="Pink title"></button>
+    </fieldset>
+
+    <label>Colour grade
+      <select id="grade">
+        <option value="sunset">Sunset</option>
+        <option value="neon">Neon</option>
+        <option value="dusk">Dusk</option>
+      </select>
+    </label>
+
+    <label>Preview size
+      <select id="size">
+        <option value="1080x1080">Square 1080 x 1080</option>
+        <option value="1080x1350">Portrait 1080 x 1350</option>
+        <option value="1920x1080">Wide 1920 x 1080</option>
+      </select>
+    </label>
+
+    <div class="exports">
+      <button id="export-square" type="button">Export 1080 x 1080 PNG</button>
+      <button id="export-portrait" type="button">Export 1080 x 1350 PNG</button>
+      <button id="export-wide" type="button">Export 1920 x 1080 PNG</button>
+    </div>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="stage">
+    <canvas id="preview" width="1080" height="1080" aria-label="Cover preview"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
